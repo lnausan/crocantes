@@ -54,10 +54,10 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex">
+    <div className="min-h-screen bg-background flex">
       {/* Sidebar Desktop */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/60 dark:border-slate-700/60">
-        <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200/60 dark:border-slate-700/60">
+      <aside className="hidden lg:flex flex-col w-64 bg-card border-r border-transparent">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-transparent">
           <div className="flex items-center space-x-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-700 dark:bg-teal-600">
               <DollarSign className="h-4 w-4 text-white" />
@@ -110,11 +110,11 @@ export default function DashboardLayout({
       )}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-r border-slate-200/60 dark:border-slate-700/60 transform transition-transform duration-300 ease-in-out lg:hidden",
+          "fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-transparent transform transition-transform duration-300 ease-in-out lg:hidden",
           sidebarOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200/60 dark:border-slate-700/60">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-transparent">
           <div className="flex items-center space-x-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-700 dark:bg-teal-600">
               <DollarSign className="h-4 w-4 text-white" />
@@ -173,7 +173,7 @@ export default function DashboardLayout({
       {/* Main content */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Top bar */}
-        <div className="sticky top-0 z-40 flex h-16 items-center justify-between bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/60 px-4 lg:px-6">
+        <div className="sticky top-0 z-40 flex h-16 items-center justify-between bg-card border-b border-transparent px-4 lg:px-6">
           <Button
             variant="ghost"
             size="icon"

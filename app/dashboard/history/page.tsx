@@ -4,7 +4,8 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, ArrowUpRight, ArrowDownRight } from "lucide-react"
+import { Calendar, ArrowUpRight, ArrowDownRight, X, TrendingUp, TrendingDown } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
 
 const mockHistory = [
   {
@@ -79,106 +80,111 @@ export default function HistoryPage() {
   const selectedMonthData = mockHistory.find((m) => m.month === selectedMonth)
 
   return (
-    <div className="flex flex-col flex-1 space-y-6 animate-fade-in">
+    <div className="flex flex-col flex-1 max-w-7xl mx-auto space-y-6 animate-fade-in">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Historial Mensual</h1>
-        <p className="text-muted-foreground">Revisa el detalle de tus finanzas mes a mes</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground">Historial</h1>
+        <p className="text-muted-foreground dark:text-muted-foreground">Revisa tus movimientos financieros por mes</p>
       </div>
 
-      {/* Resumen por meses */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {mockHistory.map((month) => (
           <Card
             key={month.month}
-            className={`cursor-pointer transition-all hover:shadow-md ${
-              selectedMonth === month.month ? "ring-2 ring-primary" : ""
+            className={`cursor-pointer transition-all hover:shadow-md border border-border dark:border-border bg-card/50 dark:bg-card/50 ${
+              selectedMonth === month.month ? "ring-2 ring-teal-500" : ""
             }`}
             onClick={() => setSelectedMonth(selectedMonth === month.month ? null : month.month)}
           >
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center justify-between">
+              <CardTitle className="text-lg flex items-center justify-between text-foreground dark:text-foreground">
                 <span>{month.name}</span>
-                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <Calendar className="h-4 w-4 text-teal-600/70 dark:text-teal-500/70" />
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Ingresos:</span>
-                <span className="text-green-600 font-medium">{formatCurrency(month.income)}</span>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground dark:text-muted-foreground">Ingresos</span>
+                  <span className="text-sm font-medium text-teal-600 dark:text-teal-500">
+                    ${formatCurrency(month.income)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground dark:text-muted-foreground">Gastos</span>
+                  <span className="text-sm font-medium text-card-foreground dark:text-card-foreground">
+                    ${formatCurrency(month.expenses)}
+                  </span>
+                </div>
+                <Separator className="bg-border dark:bg-border" />
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-foreground dark:text-foreground">Balance</span>
+                  <span className={`text-sm font-medium ${
+                    month.balance >= 0 
+                      ? "text-teal-600 dark:text-teal-500" 
+                      : "text-red-600 dark:text-red-500"
+                  }`}>
+                    ${formatCurrency(month.balance)}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Gastos:</span>
-                <span className="text-red-600 font-medium">{formatCurrency(month.expenses)}</span>
-              </div>
-              <div className="flex justify-between text-sm border-t pt-2">
-                <span className="font-medium">Saldo:</span>
-                <span className={`font-bold ${month.balance > 0 ? "text-green-600" : "text-red-600"}`}>
-                  {formatCurrency(month.balance)}
-                </span>
-              </div>
-              <div className="text-xs text-muted-foreground text-center">{formatUSD(month.balance)} USD</div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Detalle del mes seleccionado */}
-      {selectedMonthData && (
-        <Card>
+      {selectedMonth && (
+        <Card className="border border-border dark:border-border bg-card/50 dark:bg-card/50">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span>Detalle de {selectedMonthData.name}</span>
-              <Button variant="ghost" size="sm" onClick={() => setSelectedMonth(null)}>
-                Cerrar
+            <CardTitle className="text-xl flex items-center justify-between text-foreground dark:text-foreground">
+              <span>Detalles de {mockHistory.find(m => m.month === selectedMonth)?.name}</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 text-foreground hover:text-foreground dark:text-foreground dark:hover:text-foreground"
+                onClick={() => setSelectedMonth(null)}
+              >
+                <X className="h-4 w-4" />
               </Button>
             </CardTitle>
-            <CardDescription>Todos los movimientos del mes seleccionado</CardDescription>
           </CardHeader>
           <CardContent>
-            {selectedMonthData.transactions.length > 0 ? (
-              <div className="space-y-3">
-                {selectedMonthData.transactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between p-3 rounded-lg border">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`p-2 rounded-full ${
-                          transaction.type === "income"
-                            ? "bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400"
-                            : "bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400"
-                        }`}
-                      >
-                        {transaction.type === "income" ? (
-                          <ArrowUpRight className="h-4 w-4" />
-                        ) : (
-                          <ArrowDownRight className="h-4 w-4" />
-                        )}
-                      </div>
-                      <div>
-                        <p className="font-medium">{transaction.description}</p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="secondary" className="text-xs">
-                            {transaction.category}
-                          </Badge>
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(transaction.date).toLocaleDateString("es-AR")}
-                          </span>
-                        </div>
-                      </div>
+            <div className="space-y-4">
+              {selectedMonthData?.transactions.map((transaction) => (
+                <div
+                  key={transaction.id}
+                  className="flex items-center justify-between p-3 rounded-lg bg-card/60 dark:bg-card/60"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`p-2 rounded-lg ${
+                      transaction.type === "income"
+                        ? "bg-teal-100 dark:bg-teal-900/30"
+                        : "bg-card/10 dark:bg-card/80"
+                    }`}>
+                      {transaction.type === "income" ? (
+                        <TrendingUp className="h-4 w-4 text-teal-600 dark:text-teal-500" />
+                      ) : (
+                        <TrendingDown className="h-4 w-4 text-card-foreground dark:text-card-foreground" />
+                      )}
                     </div>
-                    <div className="text-right">
-                      <p className={`font-medium ${transaction.type === "income" ? "text-green-600" : "text-red-600"}`}>
-                        {formatCurrency(Math.abs(transaction.amount))}
+                    <div>
+                      <p className="text-sm font-medium text-foreground dark:text-foreground">
+                        {transaction.description}
                       </p>
-                      <p className="text-xs text-muted-foreground">{formatUSD(Math.abs(transaction.amount))}</p>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        {transaction.category}
+                      </p>
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-8 text-muted-foreground">
-                No hay transacciones registradas para este mes
-              </div>
-            )}
+                  <span className={`text-sm font-medium ${
+                    transaction.type === "income"
+                      ? "text-teal-600 dark:text-teal-500"
+                      : "text-card-foreground dark:text-card-foreground"
+                  }`}>
+                    ${formatCurrency(transaction.amount)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
       )}

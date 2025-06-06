@@ -97,27 +97,27 @@ export default function AuthPage() {
 
   if (showReset) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-background/5 dark:bg-card/5 p-4">
         <div className="absolute top-4 right-4">
           <ThemeToggle />
         </div>
 
-        <Card className="w-full max-w-md animate-fade-in border border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
+        <Card className="w-full max-w-md animate-fade-in border border-border dark:border-card/10 bg-background dark:bg-card backdrop-blur-xl">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-900/30">
-              <DollarSign className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-background dark:bg-card">
+              <DollarSign className="h-6 w-6 text-teal-400 dark:text-teal-300" />
             </div>
-            <CardTitle className="text-2xl font-bold text-slate-800 dark:text-slate-200">
+            <CardTitle className="text-2xl font-bold text-foreground dark:text-card-foreground">
               Recuperar Contraseña
             </CardTitle>
-            <CardDescription className="text-slate-600 dark:text-slate-400">
+            <CardDescription className="text-muted-foreground dark:text-card-foreground/60">
               Ingresa tu email para recibir un enlace de recuperación
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleResetPassword} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="reset-email" className="text-slate-700 dark:text-slate-300">
+                <Label htmlFor="reset-email" className="text-muted-foreground dark:text-card-foreground/60">
                   Email
                 </Label>
                 <Input
@@ -127,12 +127,12 @@ export default function AuthPage() {
                   value={resetEmail}
                   onChange={(e) => setResetEmail(e.target.value)}
                   required
-                  className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50"
+                  className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full bg-teal-700 hover:bg-teal-600 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+                className="w-full bg-teal-400 hover:bg-teal-500 dark:bg-teal-400/80 dark:hover:bg-teal-400/90 text-foreground"
                 disabled={isLoading}
               >
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -141,7 +141,7 @@ export default function AuthPage() {
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+                className="w-full text-muted-foreground hover:text-foreground dark:text-card-foreground/60 dark:hover:text-card-foreground"
                 onClick={() => setShowReset(false)}
               >
                 Volver al login
@@ -154,33 +154,33 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background dark:bg-card p-4">
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
-      <Card className="w-full max-w-md animate-fade-in border border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
+      <Card className="w-full max-w-md animate-fade-in border border-border dark:border-card/10 bg-background dark:bg-card backdrop-blur-xl">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-900/30">
-            <DollarSign className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-background dark:bg-card">
+            <DollarSign className="h-6 w-6 text-teal-400 dark:text-teal-300" />
           </div>
-          <CardTitle className="text-2xl font-bold text-slate-800 dark:text-slate-200">Crocantes</CardTitle>
-          <CardDescription className="text-slate-600 dark:text-slate-400">
+          <CardTitle className="text-2xl font-bold text-foreground dark:text-card-foreground">Crocantes</CardTitle>
+          <CardDescription className="text-muted-foreground dark:text-card-foreground/60">
             Gestiona tus finanzas personales de manera inteligente
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-100/60 dark:bg-slate-700/60">
+            <TabsList className="grid w-full grid-cols-2 bg-background dark:bg-card">
               <TabsTrigger
                 value="signin"
-                className="text-slate-600 dark:text-slate-400 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-slate-800 dark:data-[state=active]:text-slate-200"
+                className="text-muted-foreground dark:text-card-foreground data-[state=active]:bg-background dark:data-[state=active]:bg-card data-[state=active]:text-foreground dark:data-[state=active]:text-card-foreground"
               >
                 Iniciar Sesión
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="text-slate-600 dark:text-slate-400 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-slate-800 dark:data-[state=active]:text-slate-200"
+                className="text-muted-foreground dark:text-card-foreground data-[state=active]:bg-background dark:data-[state=active]:bg-card data-[state=active]:text-foreground dark:data-[state=active]:text-card-foreground"
               >
                 Registrarse
               </TabsTrigger>
@@ -189,7 +189,7 @@ export default function AuthPage() {
             <TabsContent value="signin" className="space-y-4">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email" className="text-slate-700 dark:text-slate-300">
+                  <Label htmlFor="signin-email" className="text-muted-foreground dark:text-card-foreground/60">
                     Email
                   </Label>
                   <Input
@@ -199,11 +199,11 @@ export default function AuthPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 focus:border-teal-500 focus:ring-teal-500"
+                    className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password" className="text-slate-700 dark:text-slate-300">
+                  <Label htmlFor="signin-password" className="text-muted-foreground dark:text-card-foreground/60">
                     Contraseña
                   </Label>
                   <div className="relative">
@@ -214,13 +214,13 @@ export default function AuthPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 focus:border-teal-500 focus:ring-teal-500"
+                      className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-muted-foreground hover:text-foreground dark:text-card-foreground/60 dark:hover:text-card-foreground"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -229,7 +229,7 @@ export default function AuthPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-teal-700 hover:bg-teal-600 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+                  className="w-full bg-teal-400 hover:bg-teal-500 dark:bg-teal-400/80 dark:hover:bg-teal-400/90 text-foreground"
                   disabled={isLoading}
                 >
                   {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -238,7 +238,7 @@ export default function AuthPage() {
                 <Button
                   type="button"
                   variant="link"
-                  className="w-full text-sm text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300"
+                  className="w-full text-sm text-teal-400 hover:text-teal-500 dark:text-teal-300 dark:hover:text-teal-200"
                   onClick={() => setShowReset(true)}
                 >
                   ¿Olvidaste tu contraseña?
@@ -249,7 +249,7 @@ export default function AuthPage() {
             <TabsContent value="signup" className="space-y-4">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name" className="text-slate-700 dark:text-slate-300">
+                  <Label htmlFor="signup-name" className="text-muted-foreground dark:text-card-foreground/60">
                     Nombre (opcional)
                   </Label>
                   <Input
@@ -258,11 +258,11 @@ export default function AuthPage() {
                     placeholder="Tu nombre"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 focus:border-teal-500 focus:ring-teal-500"
+                    className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-slate-700 dark:text-slate-300">
+                  <Label htmlFor="signup-email" className="text-muted-foreground dark:text-card-foreground/60">
                     Email
                   </Label>
                   <Input
@@ -272,11 +272,11 @@ export default function AuthPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 focus:border-teal-500 focus:ring-teal-500"
+                    className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="text-slate-700 dark:text-slate-300">
+                  <Label htmlFor="signup-password" className="text-muted-foreground dark:text-card-foreground/60">
                     Contraseña
                   </Label>
                   <div className="relative">
@@ -288,23 +288,23 @@ export default function AuthPage() {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       minLength={6}
-                      className="border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 focus:border-teal-500 focus:ring-teal-500"
+                      className="border-border bg-background dark:bg-card focus:border-teal-500 focus:ring-teal-500"
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-muted-foreground hover:text-foreground dark:text-card-foreground/60 dark:hover:text-card-foreground"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </Button>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Mínimo 6 caracteres</p>
+                  <p className="text-xs text-muted-foreground dark:text-card-foreground/60">Mínimo 6 caracteres</p>
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-teal-700 hover:bg-teal-600 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+                  className="w-full bg-teal-400 hover:bg-teal-500 dark:bg-teal-400/80 dark:hover:bg-teal-400/90 text-foreground"
                   disabled={isLoading}
                 >
                   {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
