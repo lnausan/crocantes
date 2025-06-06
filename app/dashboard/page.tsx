@@ -61,7 +61,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="flex flex-col flex-1 space-y-6 animate-fade-in">
       {/* Header minimalista */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight text-slate-800 dark:text-slate-200">

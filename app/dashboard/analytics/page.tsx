@@ -5,7 +5,7 @@ import { BarChart3, PieChart, TrendingUp, Calendar } from "lucide-react"
 
 export default function AnalyticsPage() {
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="flex flex-col flex-1 space-y-6 animate-fade-in">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Análisis Financiero</h1>
         <p className="text-muted-foreground">Visualiza tus patrones de gasto e ingreso con gráficos detallados</p>

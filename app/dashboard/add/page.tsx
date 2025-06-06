@@ -65,7 +65,7 @@ export default function AddTransactionPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+    <div className="flex flex-col flex-1 max-w-2xl mx-auto space-y-6 animate-fade-in">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Agregar Movimiento</h1>
         <p className="text-muted-foreground">Registra tus ingresos y gastos para mantener control de tus finanzas</p>
